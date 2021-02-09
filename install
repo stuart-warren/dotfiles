@@ -1,0 +1,30 @@
+#!/bin/bash
+export DEBIAN_FRONTEND=noninteractive
+BASEDIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+# install homebrew
+# or not
+# install zsh, dotzsh, jq, curl, fzf, reflex, git, neovim, tmux, docker, firefox, fonts, browsh, asdf
+sudo ln -fs /usr/share/zoneinfo/Europe/London /etc/localtime
+sudo apt-get update
+xargs -r sudo apt-get install -y --no-install-recommends <${BASEDIR}/packages/apt
+xargs -rI{} curl -s {} <${BASEDIR}/packages/github | bash
+[[ -d "${HOME}/.asdf" ]] || git clone --depth 1 --branch v0.8.0 https://github.com/asdf-vm/asdf.git ${HOME}/.asdf
+source $HOME/.asdf/asdf.sh ## TODO: add to shellrc
+# TODO: create $HOME/.default-python-packages
+# TODO: create $HOME/.default-golang-pkgs
+# TODO: shell function to setup:
+# asdf plugin add python
+# asdf plugin add golang
+# asdf install python latest
+# asdf install golang latest
+# asdf global python $(asdf latest python)
+# asdf global golang $(asdf latest golang)
+[[ -d "${HOME}/.oh-my-zsh" ]] || git clone --depth 1 https://github.com/ohmyzsh/ohmyzsh.git ${HOME}/.oh-my-zsh
+[[ -f "${HOME}/.zshrc" ]] || cp -f ${HOME}/.oh-my-zsh/templates/zshrc.zsh-template ${HOME}/.zshrc
+[[ -d "$HOME/.oh-my-zsh/custom/themes/powerlevel10k" ]] || git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${HOME}/.oh-my-zsh/custom/themes/powerlevel10k
+# TODO: Set ZSH_THEME="powerlevel10k/powerlevel10k" in ~/.zshrc
+# setup p10k, fzf, oh-my-zsh for zsh
+# setup tmux
+# setup vim and tmuxline
+# setup git
+# install go, python3, 
