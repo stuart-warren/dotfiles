@@ -1,0 +1,72 @@
+
+alias vim="nvim"
+alias vi="nvim"
+alias tmux='tmux -u -2'
+
+clone() {
+    repo="${1}"
+    d="${repo#'https://'}"
+    d="${d#'git@'}"
+    d="${d%'.git'}"
+    d="${d//://}"
+    git clone "${repo}" "${GITROOT}/${d}"
+    pushd "${GITROOT}/${d}"
+}
+
+asdfsetup() {
+    tool="${1}"
+    version="${2-latest}"
+    asdf plugin add ${tool}
+    asdf install ${tool} ${version}
+    asdf global ${tool} ${2-$(asdf latest ${tool})}
+}
+
+
+first-run() {
+    [[ -f "$HOME/.gitconfig" ]] && \
+    read -p "Existing gitconfig file found. ctrl+c if unexpected, return to continue"
+}
+
+get-author-details() {
+    echo "Who is the first author (you)?"
+    read -p "email address: " -e email
+    read -p "name: " -i "${email%%@*}" -e name
+    echo "
+[user]
+	name = \"${name}\"
+	email = \"${email}\"" >/tmp/gitconfig.tmp
+    cat ${HOME}/.gitconfig.template /tmp/gitconfig.tmp >${HOME}/.gitconfig
+}
+
+get-co-author-details() {
+    echo "Who are the co-authors?"
+    echo "" > /tmp/gitmessage.tmp
+    while : ; do
+        read -p "email address: " -e email
+        read -p "name: " -i "${email%%@*}" -e name
+        echo "Co-authored-by: ${name} <${email}>" >> /tmp/gitmessage.tmp
+        read -p "another co-author? " -i "no" -e cont
+        [[ "$cont" == "no" ]] && break
+    done
+    cat ${HOME}/.gitmessage.template /tmp/gitmessage.tmp >${HOME}/.gitmessage
+}
+
+setup-gitmessage() {
+    cat ${HOME}/.gitmessage.template >${HOME}/.gitmessage
+}
+
+start-pairing() {
+    first-run
+    get-author-details
+    get-co-author-details
+}
+
+start-solo() {
+    first-run
+    get-author-details
+    setup-gitmessage
+}
+
+
+alias pywatch="reflex -d none -R '^.mypy_cache/' -R '^.pytest_cache/' -r '\.py$' --"
+alias gowatch="reflex -d none -r '\.go$' --"

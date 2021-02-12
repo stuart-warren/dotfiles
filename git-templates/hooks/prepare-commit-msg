@@ -1,0 +1,9 @@
+#!/bin/bash
+# Remove whitespace, at least 50 characters should remain.
+if (( $(sed 's/\s//g' "$1" | wc -c) < 50 )) ; then
+    echo "#########################################" >&2
+    echo "Commit message too short, please improve!" >&2
+    echo "See ~/.gitmessage for `git commit` tips  " >&2
+    echo "#########################################" >&2
+    exit 1
+fi

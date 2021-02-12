@@ -1,0 +1,28 @@
+# run start-pairing or start-solo to setup user details
+#
+[url "https://github.com/"]
+	insteadOf = git@github.com:
+[url "https://github.com/"]
+	insteadOf = git://github.com/
+[commit]
+	template = ~/.gitmessage
+[push]
+	default = simple
+[core]
+	editor = vim
+	excludesfile = ~/.gitignore
+	attributesfile = ~/.gitattributes
+[status]
+	submoduleSummary = true
+[diff]
+	submodule = log
+[filter "lfs"]
+	smudge = git-lfs smudge %f
+	required = true
+	clean = git-lfs clean %f
+[pull]
+	ff = only
+[advice]
+	detachedhead = false
+[init]
+	templatedir = ~/.git-templates

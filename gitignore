@@ -1,0 +1,6 @@
+.netrc
+.env
+.DS_Store
+.vscode
+.vagrant
+.netrwhist
