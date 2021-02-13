@@ -33,4 +33,3 @@ mkdir -p ${HOME}/.config/nvim
 tmux new-session -d -s setup-tmux 'nvim +"TmuxlineSnapshot $HOME/.vim/plugged/tmuxline.vim/tmux.conf" +qa'
 
 sudo chsh -s $(which zsh) $(whoami)
-$(which zsh) --login
