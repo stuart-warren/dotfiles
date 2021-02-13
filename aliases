@@ -24,13 +24,14 @@ asdfsetup() {
 
 first-run() {
     [[ -f "$HOME/.gitconfig" ]] && \
-    read -p "Existing gitconfig file found. ctrl+c if unexpected, return to continue"
+    vared -p "Existing gitconfig file found. ctrl+c if unexpected, return to continue"
 }
 
 get-author-details() {
     echo "Who is the first author (you)?"
-    read -p "email address: " -e email
-    read -p "name: " -i "${email%%@*}" -e name
+    vared -p "email address: " -c email
+    name="${email%%@*}"
+    vared -p "name: " name
     echo "
 [user]
 	name = \"${name}\"
@@ -42,10 +43,12 @@ get-co-author-details() {
     echo "Who are the co-authors?"
     echo "" > /tmp/gitmessage.tmp
     while : ; do
-        read -p "email address: " -e email
-        read -p "name: " -i "${email%%@*}" -e name
-        echo "Co-authored-by: ${name} <${email}>" >> /tmp/gitmessage.tmp
-        read -p "another co-author? " -i "no" -e cont
+        vared -p "email address: " -c coemail
+        coname="${coemail%%@*}"
+        vared -p "name: " coname
+        echo "Co-authored-by: ${coname} <${coemail}>" >> /tmp/gitmessage.tmp
+        cont="no"
+        vared -p "another co-author? " cont
         [[ "$cont" == "no" ]] && break
     done
     cat ${HOME}/.gitmessage.template /tmp/gitmessage.tmp >${HOME}/.gitmessage
