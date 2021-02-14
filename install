@@ -8,7 +8,10 @@ sudo ln -fs /usr/share/zoneinfo/Europe/London /etc/localtime
 sudo rm -f /etc/dpkg/dpkg.cfg.d/excludes
 sudo apt-get update
 xargs -r sudo apt-get install -y --no-install-recommends <${BASEDIR}/packages/apt
-xargs -rI{} curl -s {} <${BASEDIR}/packages/github | bash
+curl https://bottlerocketlabs.jfrog.io/artifactory/api/gpg/key/public | sudo apt-key add -
+echo "deb https://bottlerocketlabs.jfrog.io/artifactory/deb all main" | sudo tee /etc/apt/sources.list.d/bottlerocketlabs.list
+sudo apt-get update
+xargs -r sudo apt-get install -y --no-install-recommends <${BASEDIR}/packages/bottlerocketlabs
 
 [[ -f "${BASEDIR}/gitconfig" ]] && ln -sf ${BASEDIR}/gitconfig ${HOME}/.gitconfig.template
 [[ -f "${BASEDIR}/gitmessage" ]] && ln -sf ${BASEDIR}/gitmessage ${HOME}/.gitmessage.template
@@ -32,3 +35,5 @@ mkdir -p ${HOME}/.config/nvim
 
 sudo chsh -s $(which zsh) $(whoami)
 tmux new-session -d -s setup-tmux 'nvim +Tmuxline +"TmuxlineSnapshot $HOME/.vim/plugged/tmuxline.vim/tmux.conf" +qa'
+
+echo "source your shell config:\n source ~/.zshrc"
