@@ -5,6 +5,7 @@ docker.io
 fzf
 git
 gpg
+gpg-agent
 jq
 less
 libbz2-dev
