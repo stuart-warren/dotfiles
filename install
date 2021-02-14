@@ -31,6 +31,6 @@ mkdir -p ${HOME}/.config/nvim
 [[ -f "${BASEDIR}/vimrc" ]] && ln -sf ${BASEDIR}/vimrc ${HOME}/.config/nvim/init.vim
 [[ -f "${HOME}/.zshrc" ]] || cp -f ${HOME}/.oh-my-zsh/templates/zshrc.zsh-template ${HOME}/.zshrc
 
-tmux new-session -d -s setup-tmux 'nvim +"TmuxlineSnapshot $HOME/.vim/plugged/tmuxline.vim/tmux.conf" +qa'
+tmux new-session -d -s setup-tmux 'nvim +Tmuxline +"TmuxlineSnapshot $HOME/.vim/plugged/tmuxline.vim/tmux.conf" +qa'
 
 sudo chsh -s $(which zsh) $(whoami)
