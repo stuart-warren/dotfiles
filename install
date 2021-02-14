@@ -2,9 +2,8 @@
 
 export DEBIAN_FRONTEND=noninteractive
 BASEDIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-# install homebrew
-# or not
-# install zsh, dotzsh, jq, curl, fzf, reflex, git, neovim, tmux, docker, firefox, fonts, browsh, asdf
+
+# TODO: install reflex, firefok, browsh
 sudo ln -fs /usr/share/zoneinfo/Europe/London /etc/localtime
 sudo rm -f /etc/dpkg/dpkg.cfg.d/excludes
 sudo apt-get update
@@ -31,6 +30,5 @@ mkdir -p ${HOME}/.config/nvim
 [[ -f "${BASEDIR}/vimrc" ]] && ln -sf ${BASEDIR}/vimrc ${HOME}/.config/nvim/init.vim
 [[ -f "${HOME}/.zshrc" ]] || cp -f ${HOME}/.oh-my-zsh/templates/zshrc.zsh-template ${HOME}/.zshrc
 
-tmux new-session -d -s setup-tmux 'nvim +Tmuxline +"TmuxlineSnapshot $HOME/.vim/plugged/tmuxline.vim/tmux.conf" +qa'
-
 sudo chsh -s $(which zsh) $(whoami)
+tmux new-session -d -s setup-tmux 'nvim +Tmuxline +"TmuxlineSnapshot $HOME/.vim/plugged/tmuxline.vim/tmux.conf" +qa'
