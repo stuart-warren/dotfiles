@@ -36,4 +36,4 @@ mkdir -p ${HOME}/.config/nvim
 sudo chsh -s $(which zsh) $(whoami)
 tmux new-session -d -s setup-tmux 'nvim +Tmuxline +"TmuxlineSnapshot $HOME/.vim/plugged/tmuxline.vim/tmux.conf" +qa'
 
-echo "source your shell config:\n source ~/.zshrc"
+echo -e "source your shell config:\n source ~/.zshrc"
