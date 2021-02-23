@@ -22,6 +22,7 @@ ncdu
 neovim
 openssh-client
 procps
+python3-pip
 shellcheck
 tk-dev
 tmux

@@ -12,6 +12,7 @@ curl https://bottlerocketlabs.jfrog.io/artifactory/api/gpg/key/public | sudo apt
 echo "deb https://bottlerocketlabs.jfrog.io/artifactory/deb all main" | sudo tee /etc/apt/sources.list.d/bottlerocketlabs.list
 sudo apt-get update
 xargs -r sudo apt-get install -y --no-install-recommends <${BASEDIR}/packages/bottlerocketlabs
+xargs -r pip3 install --user <${BASEDIR}/packages/pip
 
 [[ -f "${BASEDIR}/gitconfig" ]] && ln -sf ${BASEDIR}/gitconfig ${HOME}/.gitconfig.template
 [[ -f "${BASEDIR}/gitmessage" ]] && ln -sf ${BASEDIR}/gitmessage ${HOME}/.gitmessage.template

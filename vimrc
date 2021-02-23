@@ -43,6 +43,8 @@ Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 Plug 'edkolev/tmuxline.vim'
 Plug 'preservim/tagbar'
 Plug 'dhruvasagar/vim-dotoo'
+Plug 'lepture/vim-jinja'
+Plug 'm-kat/aws-vim'
 
 " List ends here. Plugins become visible to Vim after this call.
 call plug#end()
@@ -83,6 +85,8 @@ set number
 set mouse=a
 set keymodel=startsel,stopsel
 set updatetime=500
+set modeline
+set modelines=5
 
 " No backups
 set nobackup

@@ -25,12 +25,14 @@ export GITROOT="${HOME}/src"
 mkdir -p "${GITROOT}"
 export PROJECT_HOME=${GITROOT}
 export VIRTUAL_ENV_DISABLE_PROMPT=0
+export PY_USER_BIN=$(python3 -c 'import site; print(site.USER_BASE + "/bin")')
 
 path=(
   "${GOPATH}/bin"
   "${HOME}/bin"
   "${HOME}/.local/bin"
   "${HOME}/.cargo/bin"
+  "${PY_USER_BIN}"
   $path
 )
 
