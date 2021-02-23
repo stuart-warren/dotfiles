@@ -43,7 +43,7 @@ Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 Plug 'edkolev/tmuxline.vim'
 Plug 'preservim/tagbar'
 Plug 'dhruvasagar/vim-dotoo'
-Plug 'lepture/vim-jinja'
+Plug 'Glench/Vim-Jinja2-Syntax'
 Plug 'm-kat/aws-vim'
 
 " List ends here. Plugins become visible to Vim after this call.
