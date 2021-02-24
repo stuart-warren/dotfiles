@@ -51,6 +51,9 @@ path=(
 [[ -f $HOME/.fzf.zsh ]] && source $HOME/.fzf.zsh
 bindkey "ç" fzf-cd-widget
 
+# awscli
+[[ -f "${PY_USER_BIN}/aws_zsh_completer.sh" ]] && source "${PY_USER_BIN}/aws_zsh_completer.sh"
+
 # aliases
 [[ -f $HOME/.aliases ]] && source $HOME/.aliases
 # Local config

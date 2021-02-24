@@ -49,7 +49,8 @@ Plug 'm-kat/aws-vim'
 " List ends here. Plugins become visible to Vim after this call.
 call plug#end()
 
-colorscheme molokai
+colorscheme default
+" colorscheme molokai
 
 if need_to_install_plugins == 1
     echo "Installing plugins..."

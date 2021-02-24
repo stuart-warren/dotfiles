@@ -14,6 +14,10 @@ sudo apt-get update
 xargs -r sudo apt-get install -y --no-install-recommends <${BASEDIR}/packages/bottlerocketlabs
 xargs -r pip3 install --user <${BASEDIR}/packages/pip
 
+curl -L --create-dirs -o "${HOME}/bin/browsh" https://github.com/browsh-org/browsh/releases/download/v1.6.4/browsh_1.6.4_linux_amd64
+curl -L --create-dirs -o "${HOME}/bin/mkcert" https://github.com/FiloSottile/mkcert/releases/download/v1.4.3/mkcert-v1.4.3-linux-amd64
+chmod -R +x "${HOME}/bin/"
+
 [[ -f "${BASEDIR}/gitconfig" ]] && ln -sf ${BASEDIR}/gitconfig ${HOME}/.gitconfig.template
 [[ -f "${BASEDIR}/gitmessage" ]] && ln -sf ${BASEDIR}/gitmessage ${HOME}/.gitmessage.template
 [[ -d "${BASEDIR}/git-templates" ]] && ln -sf ${BASEDIR}/git-templates ${HOME}/.git-templates

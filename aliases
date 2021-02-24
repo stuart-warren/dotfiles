@@ -2,6 +2,9 @@
 alias vim="nvim"
 alias vi="nvim"
 alias tmux='tmux -u -2'
+alias pywatch="reflex -d none -R '^.mypy_cache/' -R '^.pytest_cache/' -r '\.py$' --"
+alias gowatch="reflex -d none -r '\.go$' --"
+alias docker="sudo docker"
 
 clone() {
     repo="${1}"
@@ -69,7 +72,3 @@ start-solo() {
     get-author-details
     setup-gitmessage
 }
-
-
-alias pywatch="reflex -d none -R '^.mypy_cache/' -R '^.pytest_cache/' -r '\.py$' --"
-alias gowatch="reflex -d none -r '\.go$' --"
