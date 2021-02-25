@@ -20,7 +20,7 @@ chmod -R +x "${HOME}/bin/"
 
 [[ -f "${BASEDIR}/gitconfig" ]] && ln -sf ${BASEDIR}/gitconfig ${HOME}/.gitconfig.template
 [[ -f "${BASEDIR}/gitmessage" ]] && ln -sf ${BASEDIR}/gitmessage ${HOME}/.gitmessage.template
-[[ -d "${BASEDIR}/git-templates" ]] && ln -sf ${BASEDIR}/git-templates ${HOME}/.git-templates
+[[ -d "${BASEDIR}/git-templates" ]] && ln -sfn ${BASEDIR}/git-templates ${HOME}/.git-templates
 [[ -f "${BASEDIR}/gitignore" ]] && ln -sf ${BASEDIR}/gitignore ${HOME}/.gitignore
 [[ -d "${HOME}/.asdf" ]] || git clone --depth 1 --branch v0.8.0 https://github.com/asdf-vm/asdf.git ${HOME}/.asdf
 # TODO: create $HOME/.default-python-packages
