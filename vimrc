@@ -45,6 +45,7 @@ Plug 'preservim/tagbar'
 Plug 'dhruvasagar/vim-dotoo'
 Plug 'Glench/Vim-Jinja2-Syntax'
 Plug 'm-kat/aws-vim'
+Plug 'ojroques/vim-oscyank'
 
 " List ends here. Plugins become visible to Vim after this call.
 call plug#end()
@@ -135,50 +136,8 @@ vmap <C-x> "+c
 vmap <C-v> c<ESC>"+p
 imap <C-v> <ESC>"+pa
 
-" tags
-map <leader>t :TagbarToggle<CR>
-
-" Sends default register to terminal TTY using OSC 52 escape sequence
-" https://github.com/leeren/dotfiles
-let g:tty=system('readlink -f /proc/'.getpid().'/fd/0')
-function! Osc52Yank()
-    let buffer=system('base64 -w0', @0)
-    let buffer=substitute(buffer, "\n$", "", "")
-    let buffer='\e]52;c;'.buffer.'\x07'
-    silent exe "!echo -ne ".shellescape(buffer).
-        \ " > ".shellescape(g:tty)
-endfunction
-" Automatically call OSC52 function on yank to sync register with host clipboard
-augroup Yank
-  autocmd!
-  autocmd TextYankPost * if v:event.operator ==# 'y' | call Osc52Yank() | endif
-augroup END
-
-autocmd Filetype python setlocal expandtab tabstop=4 shiftwidth=4 softtabstop=4
-autocmd Filetype go setlocal tabstop=4 shiftwidth=4 softtabstop=4
-autocmd Filetype yaml setlocal expandtab tabstop=2 shiftwidth=2 softtabstop=2
-" ts - show existing tab with 4 spaces width
-" sw - when indenting with '>', use 4 spaces width
-" sts - control <tab> and <bs> keys to match tabstop
-
-" Control all other files
-set shiftwidth=4
-
-noremap <C-a>z :ZoomToggle<CR>
-noremap <leader>_ :split $PWD<CR>
-noremap <leader><bar> :vsplit $PWD<CR>
-
-" vim-test
-let test#strategy = {
-  \ 'nearest': 'neovim',
-  \ 'file':    'dispatch',
-  \ 'suite':   'basic',
-\}
-nmap <silent> t<C-n> :TestNearest<CR>
-nmap <silent> t<C-f> :TestFile<CR>
-nmap <silent> t<C-s> :TestSuite<CR>
-nmap <silent> t<C-l> :TestLast<CR>
-nmap <silent> t<C-g> :TestVisit<CR>
+" https://github.com/ojroques/vim-oscyank
+autocmd TextYankPost * if v:event.operator is 'y' && v:event.regname is '+' | OSCYankReg + | endif
 
 " disable autoindent when pasting text
 " source: https://coderwall.com/p/if9mda/automatically-set-paste-mode-in-vim-when-pasting-in-insert-mode
@@ -203,5 +162,35 @@ function! XTermPasteBegin()
 endfunction
 
 inoremap <special> <expr> <Esc>[200~ XTermPasteBegin()
+
+" tags
+map <leader>t :TagbarToggle<CR>
+
+autocmd Filetype python setlocal expandtab tabstop=4 shiftwidth=4 softtabstop=4
+autocmd Filetype go setlocal tabstop=4 shiftwidth=4 softtabstop=4
+autocmd Filetype yaml setlocal expandtab tabstop=2 shiftwidth=2 softtabstop=2
+autocmd Filetype yaml.cloudformation setlocal expandtab tabstop=2 shiftwidth=2 softtabstop=2
+" ts - show existing tab with 4 spaces width
+" sw - when indenting with '>', use 4 spaces width
+" sts - control <tab> and <bs> keys to match tabstop
+
+" Control all other files
+set shiftwidth=4
+
+noremap <C-a>z :ZoomToggle<CR>
+noremap <leader>_ :split $PWD<CR>
+noremap <leader><bar> :vsplit $PWD<CR>
+
+" vim-test
+let test#strategy = {
+  \ 'nearest': 'neovim',
+  \ 'file':    'dispatch',
+  \ 'suite':   'basic',
+\}
+nmap <silent> t<C-n> :TestNearest<CR>
+nmap <silent> t<C-f> :TestFile<CR>
+nmap <silent> t<C-s> :TestSuite<CR>
+nmap <silent> t<C-l> :TestLast<CR>
+nmap <silent> t<C-g> :TestVisit<CR>
 
 call SourceIfExists("$HOME/.vimrc.local")
