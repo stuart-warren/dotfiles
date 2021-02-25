@@ -1,3 +1,4 @@
 awscli
 cfn-lint
 keepercommander
+sceptre
