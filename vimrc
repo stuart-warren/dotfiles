@@ -81,7 +81,6 @@ set showtabline=2 " Always display the tabline, even if there is only one tab
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#ale#enabled = 1
 set noshowmode " Hide the default mode text (e.g. -- INSERT -- below the statusline)
-set clipboard^=unnamed,unnamedplus
 set relativenumber
 set number
 set mouse=a
@@ -131,6 +130,7 @@ inoremap <C-s> <esc>:w<CR>a
 vnoremap <C-s> <Esc>:w<CR>
 
 " copy, cut and paste
+set clipboard=unnamedplus
 vmap <C-c> "+y
 vmap <C-x> "+c
 vmap <C-v> c<ESC>"+p
@@ -138,6 +138,8 @@ imap <C-v> <ESC>"+pa
 
 " https://github.com/ojroques/vim-oscyank
 autocmd TextYankPost * if v:event.operator is 'y' && v:event.regname is '+' | OSCYankReg + | endif
+nnoremap yy yy:OSCYankReg +<CR>
+vnoremap y :OSCYank<CR>
 
 " disable autoindent when pasting text
 " source: https://coderwall.com/p/if9mda/automatically-set-paste-mode-in-vim-when-pasting-in-insert-mode
