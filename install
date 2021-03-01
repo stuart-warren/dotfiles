@@ -3,7 +3,7 @@
 export DEBIAN_FRONTEND=noninteractive
 BASEDIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-# TODO: install reflex, firefok, browsh
+# TODO: install firefox, browsh once have method to change keybindings
 sudo ln -fs /usr/share/zoneinfo/Europe/London /etc/localtime
 sudo rm -f /etc/dpkg/dpkg.cfg.d/excludes
 sudo apt-get update
@@ -12,9 +12,10 @@ curl https://bottlerocketlabs.jfrog.io/artifactory/api/gpg/key/public | sudo apt
 echo "deb https://bottlerocketlabs.jfrog.io/artifactory/deb all main" | sudo tee /etc/apt/sources.list.d/bottlerocketlabs.list
 sudo apt-get update
 xargs -r sudo apt-get install -y --no-install-recommends <${BASEDIR}/packages/bottlerocketlabs
-xargs -r pip3 install --user <${BASEDIR}/packages/pip
+pip3 install --user pipx
+xargs -r "${HOME}/.local/bin/pipx" install <${BASEDIR}/packages/pipx
 
-curl -L --create-dirs -o "${HOME}/bin/browsh" https://github.com/browsh-org/browsh/releases/download/v1.6.4/browsh_1.6.4_linux_amd64
+# curl -L --create-dirs -o "${HOME}/bin/browsh" https://github.com/browsh-org/browsh/releases/download/v1.6.4/browsh_1.6.4_linux_amd64
 curl -L --create-dirs -o "${HOME}/bin/mkcert" https://github.com/FiloSottile/mkcert/releases/download/v1.4.3/mkcert-v1.4.3-linux-amd64
 chmod -R +x "${HOME}/bin/"
 

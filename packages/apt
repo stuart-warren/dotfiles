@@ -3,7 +3,6 @@ bash
 build-essential
 curl
 docker.io
-firefox
 fzf
 git
 gpg

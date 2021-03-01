@@ -4,3 +4,4 @@
 .vscode
 .vagrant
 .netrwhist
+.devcontainer.json
