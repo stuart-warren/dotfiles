@@ -37,7 +37,7 @@ path=(
   $path
 )
 
-[[ -f "${PY_USER_BIN}/pipx" ]] && "${PY_USER_BIN}/pipx" ensurepath # should be same as ${PY_USER_BIN}
+# [[ -f "${PY_USER_BIN}/pipx" ]] && "${PY_USER_BIN}/pipx" ensurepath # should be same as ${PY_USER_BIN}
 
 # setup oh-my-zsh
 [[ -f $ZSH/oh-my-zsh.sh ]] && source $ZSH/oh-my-zsh.sh
