@@ -26,6 +26,7 @@ neovim
 openssh-client
 procps
 python3-pip
+python3-venv
 shellcheck
 tar
 tk-dev
