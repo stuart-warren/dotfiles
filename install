@@ -13,7 +13,7 @@ echo "deb https://bottlerocketlabs.jfrog.io/artifactory/deb all main" | sudo tee
 sudo apt-get update
 xargs -r sudo apt-get install -y --no-install-recommends <${BASEDIR}/packages/bottlerocketlabs
 pip3 install --user pipx
-xargs -r "${HOME}/.local/bin/pipx" install <${BASEDIR}/packages/pipx
+xargs -r --max-lines=1 "${HOME}/.local/bin/pipx" install <${BASEDIR}/packages/pipx
 
 # curl -L --create-dirs -o "${HOME}/bin/browsh" https://github.com/browsh-org/browsh/releases/download/v1.6.4/browsh_1.6.4_linux_amd64
 curl -L --create-dirs -o "${HOME}/bin/mkcert" https://github.com/FiloSottile/mkcert/releases/download/v1.4.3/mkcert-v1.4.3-linux-amd64
