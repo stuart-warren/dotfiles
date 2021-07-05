@@ -7,6 +7,9 @@ BASEDIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 sudo ln -fs /usr/share/zoneinfo/Europe/London /etc/localtime
 sudo rm -f /etc/dpkg/dpkg.cfg.d/excludes
 sudo apt-get update
+sudo apt-get install -y software-properties-common
+xargs -r sudo add-apt-repository <${BASEDIR}/packages/apt-ppa
+sudo apt-get update
 xargs -r sudo apt-get install -y --no-install-recommends <${BASEDIR}/packages/apt
 curl https://bottlerocketlabs.jfrog.io/artifactory/api/gpg/key/public | sudo apt-key add -
 echo "deb https://bottlerocketlabs.jfrog.io/artifactory/deb all main" | sudo tee /etc/apt/sources.list.d/bottlerocketlabs.list
